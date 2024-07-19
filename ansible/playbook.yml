@@ -1,0 +1,20 @@
+---
+- name: Create and maintain a datalab
+  hosts: all
+  roles:
+    - role: setup
+      tags: [setup]
+    - role: docker
+      tags: [setup]
+    - role: fail2ban
+      tags: [setup]
+    - role: datalab
+      tags: [deploy]
+    - role: nginx
+      tags: [setup, maintenance]
+
+  tasks:
+    - name: Keep all packages up-to-date
+      ansible.builtin.include_role:
+        name: apt_upgrade
+      tags: [setup, maintenance]
