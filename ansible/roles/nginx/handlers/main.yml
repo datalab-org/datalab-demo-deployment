@@ -1,0 +1,10 @@
+# handlers file for nginx
+---
+- name: Restart nginx container
+  community.docker.docker_container:
+    name: datalab-nginx
+    image: nginx:1.25.3
+    restart: true
+    state: started
+  listen: restart nginx
+  become: true
