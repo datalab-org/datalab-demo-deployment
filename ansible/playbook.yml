@@ -29,6 +29,9 @@
     - role: borg
       name: Configure borg(matic) and remote backups
       tags: [borg]
+    - role: monitoring
+      name: Set up monitoring with Prometheus and Grafana
+      tags: [monitoring]
 
   tasks:
     - name: Keep all packages up-to-date
