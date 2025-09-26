@@ -85,6 +85,8 @@ server {
     # redirects, we set the Host: header above already.
     proxy_redirect off;
     proxy_pass http://pydatalab;
+
+    proxy_read_timeout 300;
   }
   error_page 503 /503.html;
 }
