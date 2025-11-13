@@ -78,9 +78,9 @@
       retries: 3
       start_period: 5s
 
-#- name: Render templated metrics nginx config then request nginx restart
+# - name: Render templated metrics nginx config then request nginx restart
 #  notify: restart nginx
 #  ansible.builtin.template:
 #    src: nginx_metrics.conf.j2
 #    dest: "{{ ansible_user_home_dir }}/nginx/rendered/include/ext/nginx_metrics.conf"
-    #mode: "0644"
+    # mode: "0644"
