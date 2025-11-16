@@ -30,7 +30,7 @@
       name: Configure borg(matic) and remote backups
       tags: [borg]
     - role: monitoring
-      name: Install and configure monitoring stack
+      name: Install and configure prometheus monitoring stack
       tags: [monitoring]
 
   tasks:
