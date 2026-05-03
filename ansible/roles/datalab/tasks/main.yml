@@ -73,6 +73,12 @@
     dest: "{{ ansible_user_home_dir }}/datalab/webapp/.env"
     mode: "0644"
 
+- name: Run docker system prune to clean up old containers and images
+  community.docker.docker_prune:
+    builder_cache_keep_storage: 5G
+    images: true
+    containers: true
+
 - name: Build and launch database container
   community.docker.docker_compose_v2:
     project_src: "{{ ansible_user_home_dir }}/datalab"
@@ -138,14 +144,11 @@
       - "{{ ansible_user_home_dir }}/datalab/webapp/.env"
       - "{{ ansible_user_home_dir }}/datalab/.env_version"
 
-- name: Add daily backup task to crontab
-  ansible.builtin.cron:
-    name: Daily snapshots
-    minute: "5"
-    hour: "4"
-    day: "*"
-    month: "*"
-    job: cd {{ ansible_user_home_dir }}/datalab; docker compose exec api /opt/.venv/bin/python -m invoke admin.create-backup --strategy-name daily-snapshots
+- name: Run docker system prune to clean up old containers and images
+  community.docker.docker_prune:
+    builder_cache_keep_storage: 5G
+    images: true
+    containers: true
 
 - name: Add weekly backup task to crontab
   ansible.builtin.cron:
@@ -155,12 +158,3 @@
     weekday: "7"
     month: "*"
     job: cd {{ ansible_user_home_dir }}/datalab; docker compose exec api /opt/.venv/bin/python -m invoke admin.create-backup --strategy-name weekly-snapshots
-
-- name: Add quarterly backup task to crontab
-  ansible.builtin.cron:
-    name: Quarterly snapshots
-    minute: "5"
-    hour: "2"
-    day: "1"
-    month: 1,4,7,10
-    job: cd {{ ansible_user_home_dir }}/datalab; docker compose exec api /opt/.venv/bin/python -m invoke admin.create-backup --strategy-name quarterly-snapshots
