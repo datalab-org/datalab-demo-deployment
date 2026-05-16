@@ -1,0 +1,13 @@
+# Plugin dependencies for this deployment.
+# Consumed by `invoke dev.install` during the API image build; see
+# https://docs.datalab-org.io/en/latest/plugins/ for the format.
+# Paths in [tool.uv.sources] are resolved relative to this file (i.e. the
+# datalab repo root on the remote), so local plugins synced from
+# ./src/plugins/<name>/ in this repo land at pydatalab/plugins/<name>/.
+
+dependencies = [
+    "datalab-app-plugin-dsc",
+]
+
+[tool.uv.sources]
+datalab-app-plugin-dsc = { git = "https://github.com/datalab-org/datalab-app-plugin-dsc.git", rev = "main" }
